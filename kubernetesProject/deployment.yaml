@@ -1,3 +1,21 @@
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-project-config
+data:
+  APPLICATION_PROFILE: test
+  LOGGING_LEVEL: INFO
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubernetes-project-secret
+type: Opaque
+data:
+  USERNAME: QW5kZXJzb25FbGl0
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +35,15 @@ spec:
           image: andersonelit/kubernetesproject:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: kubernetes-project-config
+          env:
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kubernetes-project-secret
+                  key: USERNAME
 ---
 apiVersion: v1
 kind: Service
