@@ -44,6 +44,16 @@ spec:
                 secretKeyRef:
                   name: kubernetes-project-secret
                   key: USERNAME
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL-USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL-PASSWORD
 ---
 apiVersion: v1
 kind: Service

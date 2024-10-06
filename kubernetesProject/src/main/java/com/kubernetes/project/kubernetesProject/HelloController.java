@@ -13,6 +13,10 @@ public class HelloController {
     private String loggingLevel;
     @Value("${USERNAME}")
     private String userName;
+    @Value("${MYSQL_USER}")
+    private String mysqlUser;
+    @Value("${MYSQL_PASSWORD}")
+    private String mysqlPassword;
 
     @GetMapping("/")
     public String hello() {
@@ -21,8 +25,12 @@ public class HelloController {
                         .replace("applicationProfile", applicationProfile)
                 + "LOGGING_LEVEL = loggingLevel, "
                     .replace("loggingLevel", loggingLevel)
-                + "USERNAME = userName"
-                    .replace("userName", userName);
+                + "USERNAME = userName, "
+                    .replace("userName", userName)
+                + "MYSQL_USER = mysqlUser, "
+                    .replace("mysqlUser", mysqlUser)
+                + "MYSQL_PASSWORD = mysqlPassword"
+                    .replace("mysqlPassword", mysqlPassword);
     }
 
 }
