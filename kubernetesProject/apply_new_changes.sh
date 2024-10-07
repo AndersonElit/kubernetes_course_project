@@ -17,8 +17,10 @@ docker build -t "$IMAGE_NAME" .
 echo "Pushing image $IMAGE_NAME..."
 docker push "$IMAGE_NAME"
 
-echo "start minukube..."
-minikube start
+if minikube status | grep -q "host: Stopped"; then
+    echo "Starting Minikube..."
+    minikube start
+fi
 
 echo "Deploy Kubernetes deployment file..."
 kubectl apply -f deployment.yaml
