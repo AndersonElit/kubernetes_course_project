@@ -17,6 +17,8 @@ public class HelloController {
     private String mysqlUser;
     @Value("${MYSQL_PASSWORD}")
     private String mysqlPassword;
+    @Value("${MYSQL_HOST}")
+    private String mysqlHost;
 
     @GetMapping("/")
     public String hello() {
@@ -30,7 +32,9 @@ public class HelloController {
                 + "MYSQL_USER = mysqlUser, "
                     .replace("mysqlUser", mysqlUser)
                 + "MYSQL_PASSWORD = mysqlPassword"
-                    .replace("mysqlPassword", mysqlPassword);
+                    .replace("mysqlPassword", mysqlPassword)
+                + "MYSQL_HOST = mysqlHost"
+                    .replace("mysqlHost", mysqlHost);
     }
 
 }

@@ -7,6 +7,7 @@ metadata:
 data:
   APPLICATION_PROFILE: test
   LOGGING_LEVEL: INFO
+  MYSQL_HOST: mysql
 ---
 apiVersion: v1
 kind: Secret
