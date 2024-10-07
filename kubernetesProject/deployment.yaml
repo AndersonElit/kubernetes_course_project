@@ -93,7 +93,7 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: kubernetes-project-hpa
