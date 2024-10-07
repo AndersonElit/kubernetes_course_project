@@ -1,4 +1,4 @@
-package com.kubernetes.project.kubernetesProject;
+package com.kubernetes.project.kubernetesProject.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "customer")
 public class Customer {
 

@@ -1,40 +1,28 @@
 package com.kubernetes.project.kubernetesProject;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.kubernetes.project.kubernetesProject.entity.Customer;
+import com.kubernetes.project.kubernetesProject.repository.CustomerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class HelloController {
 
-    @Value("${APPLICATION_PROFILE}")
-    private String applicationProfile;
-    @Value("${LOGGING_LEVEL}")
-    private String loggingLevel;
-    @Value("${USERNAME}")
-    private String userName;
-    @Value("${MYSQL_USER}")
-    private String mysqlUser;
-    @Value("${MYSQL_PASSWORD}")
-    private String mysqlPassword;
-    @Value("${MYSQL_HOST}")
-    private String mysqlHost;
+    private final CustomerRepository customerRepository;
 
-    @GetMapping("/")
-    public String hello() {
-        return "Hello to kubernetes course!, "
-                + "APPLICATION_PROFILE = applicationProfile, "
-                        .replace("applicationProfile", applicationProfile)
-                + "LOGGING_LEVEL = loggingLevel, "
-                    .replace("loggingLevel", loggingLevel)
-                + "USERNAME = userName, "
-                    .replace("userName", userName)
-                + "MYSQL_USER = mysqlUser, "
-                    .replace("mysqlUser", mysqlUser)
-                + "MYSQL_PASSWORD = mysqlPassword"
-                    .replace("mysqlPassword", mysqlPassword)
-                + "MYSQL_HOST = mysqlHost"
-                    .replace("mysqlHost", mysqlHost);
+    @PostMapping("/save")
+    public String save(@RequestBody Customer customer) {
+        Customer savedCustomer = customerRepository.save(customer);
+        return savedCustomer.toString();
+    }
+
+    @GetMapping("/list")
+    public String getList() {
+        return customerRepository.findAll().toString();
     }
 
 }
